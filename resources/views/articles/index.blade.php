@@ -23,8 +23,9 @@
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Headline</th>
-                          <th scope="col">Publish Date</th>
+                          <th scope="col">Arabic Headline</th>
+                          <th scope="col">English Headline</th>
+                          <th scope="col">French Headline</th>
                           <th scope="col" class="text-right">Actions</th>
                         </tr>
                       </thead>
@@ -39,13 +40,29 @@
                                         {{ $article->headline_ar }}
                                     </td>
                                     <td>
-                                        {{ Carbon\Carbon::now()->diffForHumans() }}                                         
+                                        {{ $article->headline_en ?? '-' }}
+                                    </td>
+                                    <td>
+                                        {{ $article->headline_fr ?? '-'}}
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="{{ route('article.edit',['id' => $article->id ]) }}" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-edit"></i> edit
+                                        </a>
+                                        <form method="post" action="{{ route('article.destroy',['id' => $article->id ]) }} ">
+                                            @method("DELETE")
+                                            @csrf
+                                        <button class="btn btn-sm btn-danger" type="submit">
+                                            <i class="fa fa-trash"></i> delete
+                                        </button>
+                                        
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach 
                         @else 
                             <tr>
-                                <td colspan="4" class="text-center">
+                                <td colspan="5" class="text-center">
                                     No Articles
                                 </td>
                             </tr>

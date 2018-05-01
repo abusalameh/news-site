@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace News\Http\Controllers;
 
-use App\Category;
+use News\Category;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
@@ -53,7 +53,7 @@ class CategoriesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Category  $Category
+     * @param  \News\Category  $Category
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -64,7 +64,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Category  $Category
+     * @param  \News\Category  $Category
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -77,7 +77,7 @@ class CategoriesController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $Category
+     * @param  \News\Category  $Category
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -99,11 +99,18 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Category  $Category
+     * @param  \News\Category  $Category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $Category)
+    public function destroy(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        if ($category->articles->count()) {
+            $category->articles->each->delete();
+        }
+        $category->delete();
+        $request->session()->flash('status', 'Record Deleted successfully!');
+        return redirect()->route('category.index');
+
     }
 }

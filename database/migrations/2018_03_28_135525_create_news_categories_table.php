@@ -18,7 +18,7 @@ class CreateNewsCategoriesTable extends Migration
             $table->string('name_ar');
             $table->string('name_en');
             $table->string('name_fr');
-            $table->timestamp('deleted_at')->default(null);
+            $table->timestamp('deleted_at')->nullable()->default(null);
             $table->timestamps();
         });
     }

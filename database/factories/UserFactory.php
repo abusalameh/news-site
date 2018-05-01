@@ -14,7 +14,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(News\User::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
@@ -23,7 +23,7 @@ $factory->define(App\User::class, function (Faker $faker) {
     ];
 });
 
-$factory->define(App\Category::class, function (Faker $faker) {
+$factory->define(News\Category::class, function (Faker $faker) {
     return [
         'name_ar' => $faker->name,
         'name_en' => $faker->name,
@@ -32,7 +32,7 @@ $factory->define(App\Category::class, function (Faker $faker) {
 });
 
 
-$factory->define(App\Article::class, function (Faker $faker) {
+$factory->define(News\Article::class, function (Faker $faker) {
     $states = ['DRAFT', 'LIVE','DELETED','APPROVAL'];
     
     return [

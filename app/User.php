@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace News;
 
-use App\Article;
+use News\Article;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 

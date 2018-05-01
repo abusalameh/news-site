@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        Create  New Article
+                        Edit  {{ $article->headline }}
                         <a href="{{ route('article.index') }}" class="btn btn-primary float-right">
                             <i class="fa fa-arrow-left"></i>
                             Back
@@ -32,14 +32,15 @@
                     @endif
                     @include('articles.partials.nav',['languages' => $languages])
                     <div class="container">
-                        <form class="form" method="POST" enctype="multipart/form-data" action="{{ route('article.store') }}" >
-                            @include('articles.partials.form', ['categories' => $categories, 'article' => new News\Article])
+                        <form class="form" method="POST" enctype="multipart/form-data" action="{{ route('article.update',['id' => $article->id ]) }}" >
+                            @method("PATCH")
+                            @include('articles.partials.form', ['categories' => $categories, 'article' => $article])
                             <div class="form-group row mb-0">
                                 <div class="col-sm-10">
                                     <button type="submit" class="btn btn-success" id="form_submit">
                                         <i class="fa fa-check" id="submit"></i>
                                         <i class="fa fa-spin fa-spinner hidden" id="loading"></i>
-                                        {{ __('Save') }}
+                                        {{ __('Update') }}
                                     </button>
 
                                     <a class="btn btn-light" href="{{ route('article.index') }}">

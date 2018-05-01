@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace News;
 
-use App\NewsArticle;
+use News\NewsArticle;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\App;
 

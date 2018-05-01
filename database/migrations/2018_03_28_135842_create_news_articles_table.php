@@ -24,9 +24,7 @@ class CreateNewsArticlesTable extends Migration
             $table->text('text_ar');
             $table->text('text_en')->nullable()->default(null);
             $table->text('text_fr')->nullable()->default(null);
-            $table->string('image',500);
-            $table->string('thumb_image',500);
-            $table->timestamp('publish_date')->nullable()->default(null);
+            $table->string('image',500)->nullable();
             $table->timestamp('deleted_at')->nullable()->default(null);
             $table->enum('state', ['DRAFT', 'LIVE','DELETED','APPROVAL']);
             $table->integer('category_id')->unsigned();

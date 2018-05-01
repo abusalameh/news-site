@@ -23,7 +23,9 @@
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Name</th>
+                          <th scope="col">Arabic Name</th>
+                          <th scope="col">English Name</th>
+                          <th scope="col">French Name</th>
                           <th scope="col" class="text-right">Actions</th>
                         </tr>
                       </thead>
@@ -32,23 +34,27 @@
                             @foreach ($categories as $category)
                                 <tr>
                                     <td>{{ $category->id }}</td>
-                                    <td>{{ $category->name }} </td>
+                                    <td>{{ $category->name_ar }} </td>
+                                    <td>{{ $category->name_en ?? '-' }} </td>
+                                    <td>{{ $category->name_fr ?? '-' }} </td>
                                     <td class="text-right">
-                                        <a href="{{ route('category.show',['id' => $category->id ]) }}" class="btn btn-sm btn-primary">
-                                        <i class="fa fa-search"></i> view
-                                        </a>
                                         <a href="{{ route('category.edit',['id' => $category->id ]) }}" class="btn btn-sm btn-warning">
                                         <i class="fa fa-edit"></i> edit
                                         </a>
-                                        <a href="{{ route('category.destroy',['id' => $category->id ]) }}" class="btn btn-sm btn-danger">
-                                        <i class="fa fa-trash"></i> delete
-                                        </a>
+                                        <form method="post" action="{{ route('category.destroy',['id' => $category->id ]) }} ">
+                                            @method("DELETE")
+                                            @csrf
+                                        <button class="btn btn-sm btn-danger" type="submit">
+                                            <i class="fa fa-trash"></i> delete
+                                        </button>
+                                        
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         @else 
                             <tr>
-                                <td colspan="3" class="text-center">
+                                <td colspan="5" class="text-center">
                                     No Data
                                 </td>
                             </tr>
