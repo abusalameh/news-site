@@ -3,6 +3,7 @@
 namespace News\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use News\Category;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $categories = Category::all() ?? [];
+
+        view()->share('nav_data', $categories);
     }
 
     /**

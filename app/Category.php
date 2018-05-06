@@ -21,4 +21,9 @@ class Category extends Model
     	return $this->hasMany(Article::class,'category_id','id');
     }
 
+    public function getLatestArticles($limit = 4)
+    {
+        return $this->articles()->orderBy('created_at','DESC')->limit($limit)->get();
+    }
+
 }
